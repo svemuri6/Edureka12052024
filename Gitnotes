@@ -1,0 +1,161 @@
+Github:
+---------
+It is a website where we host all our git codes.
+
+
+Scenrio1: Create a working directory.
+> mkdir git-demo-1252024
+> cd git-demo-1252024
+
+
+Scenerio2: Git installation
+ubuntu:
+--------
+> apt-get update
+> apt-get install git -y
+
+Centos/RHEL
+> yum install git -y
+> git –version ( To know if git has been installed )
+
+windows:
+https://git-scm.com/download/win
+
+
+Scenario 3:
+initialize/configure local repository in working directory.
+
+Check using the command ls -la (See no .git folders) ( La – List of files, -l : Long listing format of files, -a: List of hidden files and directories) 
+git init
+Rechek using ls – la command.
+-	Can now see. git folder created, which means a local repository has been created/ initialized /configured within the Working Directory
+-	All files in the WD will be tracked by Git
+
+git config --global user.email test@email.com
+git config --global user.name test
+
+
+scenerio4: create a file and add it to local repository.
+
+WD – is where all the changes are made to the files
+
+> vi testfile (Editor to create a file)
+> esc :wq (To Save File)
+> git status (Shows status of the file - Shows the file is untracked)
+> git add testfile. (T move all the files in the WD to staging area – use git add .) g
+> git status
+> git commit -m "1st commit."
+	-m stands for message
+> git status (Nothing to commit)
+> git ls-files (To check for files in local repository) ( Can use ls to test for files in WD)
+
+Git config -- global user.email test@email.com ( Recognizing yourself to Git)
+Git config – global user.name test
+
+Scenario 5: ids to commit. 
+git log –oneline ( Short version )
+git log ( Long Version )
+git show <commit id>
+
+scenario 6: checking staged and unstaged changes
+vi testfile 
+cat testfile
+git diff <filename> ==> command to check changes made in file when file is in working directory
+git diff --staged testfile ==> command to check changes made in file when file is in staging area.
+Git show – when the file is in local repository 
+
+scenario 7: Deletion of file:
+how to delete a file from wd and local repo
+> git rm testfile
+how to delete a file from local repo only
+> git rm --cached testfile
+
+
+scenario 8: Ignoring files: ( while compilation there are a lot of files created which we do not want to push to local rep or to remote repo for git to track)
+vi .gitignore ( Create .gitignore file)
+*.class
+temp
+git add .gitinore
+git commit 
+
+**touch testfile to check
+
+scenario 9: Revert changes in git (Undo changes specially for the reverting deleted files)
+git revert commit id
+
+scenario 10: reset. ( To perform clean-up of WD/ Local repo. – all files that where present in the LD to that point of time is gone. - permanently 
+git reset commit id --hard.
+
+Scenario 11: Create your github account
+
+Scenario: 12: Branching – To create isolation between difference versions of the code base to ensure a version of the application is released accordingly. Branching is an isolation strategy – The concept is from an Inverted Tree structure – Root – Trunk (1) – Branches (many)
+Only Master/Main branch will be deployed to customers. 
+
+> We can have multiple child branch but only one branch either master or main can deploy code to production environment.
+> It helps in parallel development. (Different Versions being developed)
+> Scope of development varies across branches.
+
+> git branch -a
+> git branch b1 master
+> git checkout b1 ( Switched to b1 branch)
+>Git status
+> vi sample3.txt
+> git add, git commit
+> git checkout master ( Switched to Master)
+> git merge b1 master
+
+
+> git branch -a (to check for number of branches, by default there is only 1 Master branch)
+> git branch b1 master (To create a branch, b1 is name of the branch created out of the Master branch, Child branch inherits all properties from Master branch such as files, commits, etc.)
+
+> git checkout b1 (To switch to b1 branch, or any branch use checkout command)
+>Git status – shows the switch to new branch
+
+Since child inherits all the properties of the Master, check by using git log –online b1 command and git log –oneline master command – The commit IDs are the same
+
+> vi sample3.txt
+> git add, git commit
+
+When we are ready to deploy code to production, we need to merge all code to master – In order to do that we need to first checkout to Master . 
+> git checkout master
+
+And then merge the source /child branch to the parent branch  
+> git merge b1 master
+
+
+Scenario 13:
+Resolving merge conflicts
+> Made changes in same file in 2 branches, while merge we get conflicts and to resolve conflict,edit file and modify with necessary changes.
+> After you modify, add and commit to resolve conflicts.
+
+
+Scenario 14: Delete a branch
+git branch -D b1
+
+# Stashing : It is a git feature to hide incomplete work/development in a temporary area. It is saved. 
+git stash ==> stashes/hides all files in working directory.
+git stash list – to see what files are stashed.
+git show (stash nimer)
+git stash pop ==> brings all file from stashing area back to working dir and cleans the stashing area
+
+git stash -p ==> partial stashing
+git stash drop <stashnumber> ==> to retrieve one file at a time
+
+git stash pop ==> It brings stashed file back to working directory and clears stashing area
+git stash apply ==> It brings stashed file back to working directory and does not clear stashing area
+
+
+scenerio 14: Working with remote repository
+git clone <repository url>  ==> execute to create full copy of remote repo in my local
+git push originmain # origin is a variable point to remote repo url
+
+scenerio 15:
+git developer token
+
+scenerio 16:
+git pull is used to pull updated code from remote to local
+
+scenerio 17:
+git fetch will just show what will be pulled when pull command is executed
+pull=fetch+merge
+
